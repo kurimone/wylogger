@@ -1,8 +1,5 @@
-module xjtlu-dorm-net-helper
+module xjtlu-dorm-net-auth-helper
 
 go 1.21.2
 
-require (
-	github.com/gorilla/schema v1.2.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
-)
+require gopkg.in/yaml.v3 v3.0.1

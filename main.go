@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"xjtlu-dorm-net-helper/auth"
-	"xjtlu-dorm-net-helper/conf"
+	"xjtlu-dorm-net-auth-helper/auth"
+	"xjtlu-dorm-net-auth-helper/conf"
 )
 
 func main() {
@@ -12,14 +12,16 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println("[ENV] URL = ", conf.Get().URL)
-	fmt.Println("[ENV] Domain = ", conf.Get().Domain)
-	fmt.Println("[ENV] Username = ", conf.Get().Username)
-	fmt.Println("[ENV] Password = ", conf.Get().Password)
+	fmt.Println("[DEBUG/MODE] DEBUG MODE ENABLED, BEWARE OF YOUR SECURITY!")
+	fmt.Println("[DEBUG/ENV] URL =", conf.Get().URL)
+	fmt.Println("[DEBUG/ENV] Domain =", conf.Get().Domain)
+	fmt.Println("[DEBUG/ENV] Username =", conf.Get().Username)
+	fmt.Println("[DEBUG/ENV] Password =", conf.Get().Password)
+	fmt.Println("[INFO/ENV] Profile \"config.yml\" loaded.")
 
 	err = auth.Login()
 	if err != nil {
-		panic(err)
+		fmt.Println("[ERROR/MAIN] Failed to login:", err)
 	}
+	println("[INFO/MAIN] Login Successful.")
 }

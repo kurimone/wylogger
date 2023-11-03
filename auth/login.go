@@ -1,8 +1,10 @@
 package auth
 
 import (
-	"xjtlu-dorm-net-helper/api"
-	"xjtlu-dorm-net-helper/conf"
+	"errors"
+	"fmt"
+	"xjtlu-dorm-net-auth-helper/api"
+	"xjtlu-dorm-net-auth-helper/conf"
 )
 
 func Login() error {
@@ -12,10 +14,18 @@ func Login() error {
 		Password: conf.Get().Password,
 	}
 
-	err := api.Login(params)
+	result, err := api.Login(params)
 	if err != nil {
-		return err
+		fmt.Println("[ERROR/AUTH] Failed on API call:", err)
+		return errors.New("failed on API call")
 	}
+
+	if result.ReplyCode != 0 {
+		fmt.Println("[ERROR/AUTH] Exceptional API Returns:", result.ReplyCode, result.ReplyMsg)
+		return errors.New("exceptional API Returns")
+	}
+
+	fmt.Println("[DEBUG/AUTH] API call succeeded.", result)
 
 	return nil
 }
