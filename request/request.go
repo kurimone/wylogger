@@ -2,6 +2,7 @@ package request
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	_url "net/url"
 	"strings"
@@ -10,10 +11,8 @@ import (
 	"github.com/gorilla/schema"
 )
 
-var BASE_URL = conf.Get().URL
-
 func Do(url, method string, body interface{}, result interface{}) error {
-	url = BASE_URL + "/api/portal/v1" + url
+	url = conf.Get().URL + "/api/portal/v1" + url
 
 	encoder := schema.NewEncoder()
 	values := _url.Values{}
@@ -32,6 +31,8 @@ func Do(url, method string, body interface{}, result interface{}) error {
 	if err := SetHeader(request); err != nil {
 		return err
 	}
+
+	fmt.Println("[HTTP] POST ", url)
 
 	client := &http.Client{}
 	response, err := client.Do(request)
@@ -55,16 +56,16 @@ func SetHeader(request *http.Request) error {
 	headers.Set("Cache-Control", "no-cache")
 	headers.Set("Content-Type", "applicationapplication/x-www-form-urlencoded; charset=UTF-8")
 
-	u, err := _url.Parse(BASE_URL)
+	u, err := _url.Parse(conf.Get().URL)
 	if err != nil {
-		return nil
+		return err
 	}
 	headers.Set("Host", u.Host)
 
-	headers.Set("Origin", BASE_URL)
+	headers.Set("Origin", conf.Get().URL)
 	headers.Set("Pragma", "no-cache")
 	headers.Set("Proxy-Connection", "keep-alive")
-	headers.Set("Referer", BASE_URL+"/portal/")
+	headers.Set("Referer", conf.Get().URL+"/portal/")
 	headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0")
 
 	for key, values := range headers {
