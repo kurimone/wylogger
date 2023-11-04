@@ -10,7 +10,6 @@ import (
 	"time"
 )
 
-// LogLevel defines the severity of the log message.
 type LogLevel int
 
 const (
@@ -21,7 +20,6 @@ const (
 	FATAL
 )
 
-// ANSI color codes
 const (
 	colorRed    = "\033[31m"
 	colorGreen  = "\033[32m"
@@ -33,7 +31,6 @@ const (
 	colorReset  = "\033[0m"
 )
 
-// Map of log level to color
 var logLevelColors = map[LogLevel]string{
 	DEBUG: colorBlue,
 	INFO:  colorGreen,
@@ -42,19 +39,16 @@ var logLevelColors = map[LogLevel]string{
 	FATAL: colorPurple,
 }
 
-// Logger wraps the standard log.Logger from the Go standard library.
 type Logger struct {
 	*log.Logger
 	level LogLevel
 }
 
-// Singleton instance of Logger
 var (
 	globalLogger *Logger
 	once         sync.Once
 )
 
-// NewLogger creates a new Logger instance with the specified log level.
 func NewLogger(level LogLevel) *Logger {
 	return &Logger{
 		Logger: log.New(os.Stdout, "", 0), // Disable the default timestamp
@@ -62,15 +56,18 @@ func NewLogger(level LogLevel) *Logger {
 	}
 }
 
-// Init sets up the global logger instance with the specified log level.
-// It should be called from main before using the logger functions.
 func Init(level LogLevel) {
 	once.Do(func() {
 		globalLogger = NewLogger(level)
 	})
 }
 
-// logOutput is a helper function to format and output log messages.
+func SetLevel(level LogLevel) {
+	if globalLogger != nil {
+		globalLogger.level = level
+	}
+}
+
 func output(level LogLevel, levelStr string, format string, args ...interface{}) {
 	if globalLogger.level <= level {
 		_, file, line, ok := runtime.Caller(2)
@@ -93,27 +90,22 @@ func output(level LogLevel, levelStr string, format string, args ...interface{})
 	}
 }
 
-// Debug prints debug-level messages.
 func Debug(format string, args ...interface{}) {
 	output(DEBUG, "DEBUG", format, args...)
 }
 
-// Info prints information-level messages.
 func Info(format string, args ...interface{}) {
 	output(INFO, "INFO", format, args...)
 }
 
-// Warn prints warning-level messages.
 func Warn(format string, args ...interface{}) {
 	output(WARN, "WARN", format, args...)
 }
 
-// Error prints error-level messages.
 func Error(format string, args ...interface{}) {
 	output(ERROR, "ERROR", format, args...)
 }
 
-// Fatal prints fatal-level messages and exits the program.
 func Fatal(format string, args ...interface{}) {
 	output(FATAL, "FATAL", format, args...)
 	os.Exit(1)

@@ -1,5 +1,6 @@
 version: 1
 
+mode: INFO
 url: "http://10.10.16.12"
 domain: "cmcc"
 username: "00000000000"

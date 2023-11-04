@@ -23,7 +23,7 @@ func Do(url, method string, params interface{}, result interface{}) error {
 
 	buffer := bytes.NewBuffer(reqBody)
 
-	logger.Debug("Creating HTTP request: %s, %s, %s", method, url, params)
+	logger.Debug("Creating HTTP request: %s, %s", method, url)
 	request, err := http.NewRequest(method, url, buffer)
 	if err != nil {
 		logger.Error("Failed to create a new HTTP request: %s", err)

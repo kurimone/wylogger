@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	logger.Init(logger.DEBUG)
+	logger.Init(logger.INFO)
 	logger.Info("Logger loaded")
 
 	var err error
@@ -16,6 +16,14 @@ func main() {
 	if err != nil {
 		logger.Fatal("Failed to load profile \"config.yml\"")
 	}
+
+	switch conf.Get().Mode {
+	case "DEBUG":
+		logger.SetLevel(logger.DEBUG)
+	case "INFO":
+		logger.SetLevel(logger.INFO)
+	}
+
 	logger.Debug("DEBUG MODE ENABLED, MAKE SURE YOU WANT IT!")
 	logger.Debug("[ENV] URL = %s", conf.Get().URL)
 	logger.Debug("[ENV] Domain = %s", conf.Get().Domain)
