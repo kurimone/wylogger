@@ -1,27 +1,32 @@
 package main
 
 import (
-	"fmt"
 	"xjtlu-dorm-net-auth-helper/auth"
 	"xjtlu-dorm-net-auth-helper/conf"
+	"xjtlu-dorm-net-auth-helper/logger"
 )
 
 func main() {
+	logger.Init(logger.DEBUG)
+	logger.Info("Logger loaded")
+
 	var err error
+
 	err = conf.Load("config.yml")
 	if err != nil {
-		panic(err)
+		logger.Fatal("Failed to load profile \"config.yml\"")
 	}
-	fmt.Println("[DEBUG/MODE] DEBUG MODE ENABLED, BEWARE OF YOUR SECURITY!")
-	fmt.Println("[DEBUG/ENV] URL =", conf.Get().URL)
-	fmt.Println("[DEBUG/ENV] Domain =", conf.Get().Domain)
-	fmt.Println("[DEBUG/ENV] Username =", conf.Get().Username)
-	fmt.Println("[DEBUG/ENV] Password =", conf.Get().Password)
-	fmt.Println("[INFO/ENV] Profile \"config.yml\" loaded.")
+	logger.Debug("DEBUG MODE ENABLED, MAKE SURE YOU WANT IT!")
+	logger.Debug("[ENV] URL = %s", conf.Get().URL)
+	logger.Debug("[ENV] Domain = %s", conf.Get().Domain)
+	logger.Debug("[ENV] Username = %s", conf.Get().Username)
+	logger.Debug("[ENV] Password = %s", conf.Get().Password)
+	logger.Info("Profile \"config.yml\" loaded")
 
 	err = auth.Login()
 	if err != nil {
-		fmt.Println("[ERROR/MAIN] Failed to login:", err)
+		logger.Error("Failed to login: %s", err)
+		return
 	}
-	println("[INFO/MAIN] Login Successful.")
+	logger.Info("Login successful")
 }

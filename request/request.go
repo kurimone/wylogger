@@ -4,60 +4,60 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"net/http"
 	_url "net/url"
 	"xjtlu-dorm-net-auth-helper/conf"
+	"xjtlu-dorm-net-auth-helper/logger"
 )
 
 func Do(url, method string, params interface{}, result interface{}) error {
 	url = conf.Get().URL + "/api/portal/v1" + url
 
+	logger.Debug("Marshalling JSON")
 	reqBody, err := json.Marshal(params)
 	if err != nil {
-		fmt.Println("[ERROR/REQUEST] Failed to marshal JSON:", err, params)
+		logger.Error("Failed to marshal JSON: %s", err)
 		return errors.New("failed to marshal JSON")
 	}
-	fmt.Println("[DEBUG/REQUEST] JSON marshalled.")
 
 	buffer := bytes.NewBuffer(reqBody)
 
+	logger.Debug("Creating HTTP request: %s, %s, %s", method, url, params)
 	request, err := http.NewRequest(method, url, buffer)
 	if err != nil {
-		fmt.Println("[ERROR/REQUEST] Failed to create a new HTTP request:", err, method, url, params)
+		logger.Error("Failed to create a new HTTP request: %s", err)
 		return errors.New("faild to create a new HTTP request")
 	}
-	fmt.Println("[DEBUG/REQUEST] New HTTP request created.")
 
+	logger.Debug("Setting request header")
 	if err := SetHeader(request); err != nil {
-		fmt.Println("[ERROR/REQUEST] Failed to set header:", err)
+		logger.Error("Failed to set header: %s", err)
 		return errors.New("failed to set header")
 	}
-	fmt.Println("[DEBUG/REQUEST] Request header is set.")
 
 	client := &http.Client{}
+	logger.Debug("Sending HTTP request")
 	response, err := client.Do(request)
 	if err != nil {
-		fmt.Println("[ERROR/REQUEST] Failed to send HTTP request:", err, method, url, params)
+		logger.Error("Failed to send HTTP request: %s", err)
 		return errors.New("failed to send HTTP request")
 	}
 	defer response.Body.Close()
-	fmt.Println("[DEBUG/REQUEST] HTTP request sended.")
 
+	logger.Debug("Reading HTTP response")
 	resBody, err := io.ReadAll(response.Body)
 	if err != nil {
-		fmt.Println("[ERROR/REQUEST] Failed to read HTTP response:", err, method, url, params)
+		logger.Error("Failed to read HTTP response: %s", err)
 		return errors.New("failed to read HTTP response")
 	}
-	fmt.Println("[DEBUG/REQUEST] HTTP response readed.")
 
+	logger.Debug("Unmarshalling JSON")
 	err = json.Unmarshal(resBody, result)
 	if err != nil {
-		fmt.Println("[ERROR/REQUEST] Failed to unmarshal JSON:", err, method, url, params)
+		logger.Error("Failed to unmarshal JSON: %s", err)
 		return errors.New("failed to unmarshal JSON")
 	}
-	fmt.Println("[DEBUG/REQUEST] JSON Unmarshalled.")
 
 	return nil
 }
@@ -72,10 +72,9 @@ func SetHeader(request *http.Request) error {
 
 	u, err := _url.Parse(conf.Get().URL)
 	if err != nil {
-		fmt.Println("[ERROR/REQUEST] Failed to parse URL:", err, conf.Get().URL)
+		logger.Error("Failed to parse URL: %s", err)
 		return errors.New("failed to parse URL")
 	}
-	fmt.Println("[DEBUG/REQUEST] URL parsed.")
 
 	headers["Host"] = u.Host
 
