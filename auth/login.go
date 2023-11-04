@@ -25,7 +25,7 @@ func Login() error {
 		return errors.New("exceptional API Returns")
 	}
 
-	logger.Debug("API call succeeded: %s", result)
+	logger.Debug("API call succeeded: %v", result)
 
 	return nil
 }

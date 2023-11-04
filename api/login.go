@@ -13,8 +13,8 @@ type LoginParams struct {
 }
 
 type LoginReturns struct {
-	ReplyCode int `json:"reply_code"`
-	ReplyMsg  int `json:"reply_msg"`
+	ReplyCode int    `json:"reply_code"`
+	ReplyMsg  string `json:"reply_msg"`
 }
 
 func Login(params LoginParams) (LoginReturns, error) {
