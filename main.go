@@ -17,18 +17,15 @@ func main() {
 		logger.Fatal("Failed to load profile \"config.yml\"")
 	}
 
-	switch conf.Get().Mode {
-	case "DEBUG":
+	if conf.Get().Debug {
 		logger.SetLevel(logger.DEBUG)
-	case "INFO":
-		logger.SetLevel(logger.INFO)
 	}
-
 	logger.Debug("DEBUG MODE ENABLED, MAKE SURE YOU WANT IT!")
 	logger.Debug("[ENV] URL = %s", conf.Get().URL)
 	logger.Debug("[ENV] Domain = %s", conf.Get().Domain)
 	logger.Debug("[ENV] Username = %s", conf.Get().Username)
 	logger.Debug("[ENV] Password = %s", conf.Get().Password)
+
 	logger.Info("Profile \"config.yml\" loaded")
 
 	err = auth.Login()
