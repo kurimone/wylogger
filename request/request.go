@@ -16,7 +16,6 @@ func Do(url, method string, params interface{}, result interface{}) error {
 	logger.Debug("Marshalling JSON")
 	reqBody, err := json.Marshal(params)
 	if err != nil {
-		logger.Debug("Failed to marshal JSON: %s", err)
 		return err
 	}
 
@@ -25,13 +24,11 @@ func Do(url, method string, params interface{}, result interface{}) error {
 	logger.Debug("Creating HTTP request: %s, %s", method, url)
 	request, err := http.NewRequest(method, url, buffer)
 	if err != nil {
-		logger.Debug("Failed to create a new HTTP request: %s", err)
 		return err
 	}
 
 	logger.Debug("Setting request header")
 	if err := SetHeader(request); err != nil {
-		logger.Debug("Failed to set header: %s", err)
 		return err
 	}
 
@@ -39,7 +36,6 @@ func Do(url, method string, params interface{}, result interface{}) error {
 	logger.Debug("Sending HTTP request")
 	response, err := client.Do(request)
 	if err != nil {
-		logger.Debug("Failed to send HTTP request: %s", err)
 		return err
 	}
 	defer response.Body.Close()
@@ -47,14 +43,12 @@ func Do(url, method string, params interface{}, result interface{}) error {
 	logger.Debug("Reading HTTP response")
 	resBody, err := io.ReadAll(response.Body)
 	if err != nil {
-		logger.Debug("Failed to read HTTP response: %s", err)
 		return err
 	}
 
 	logger.Debug("Unmarshalling JSON")
 	err = json.Unmarshal(resBody, result)
 	if err != nil {
-		logger.Debug("Failed to unmarshal JSON: %s", err)
 		return err
 	}
 
@@ -69,9 +63,9 @@ func SetHeader(request *http.Request) error {
 	headers["Cache-Control"] = "no-cache"
 	headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8" // ???
 
+	logger.Debug("Parsing header")
 	u, err := _url.Parse(conf.Get().URL)
 	if err != nil {
-		logger.Error("Failed to parse URL: %s", err)
 		return err
 	}
 

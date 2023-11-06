@@ -84,7 +84,7 @@ func output(level LogLevel, levelStr string, format string, args ...interface{})
 		if !ok {
 			color = colorWhite // Default color
 		}
-		prefix := fmt.Sprintf("[%s]\t[%s]\t[%s:%d]\t", levelStr, timeStr, file, line)
+		prefix := fmt.Sprintf("%s\t%s\t[%s:%d]\t", timeStr, levelStr, file, line)
 		message := fmt.Sprintf(format, args...)
 		globalLogger.Printf(color + prefix + message + colorReset)
 	}

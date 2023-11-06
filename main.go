@@ -12,7 +12,7 @@ func main() {
 
 	err := conf.Load("config.yml")
 	if err != nil {
-		logger.Fatal("Failed to load profile \"config.yml\"")
+		logger.Fatal("Failed to load profile \"config.yml\": %s", err)
 	}
 
 	if conf.Get().Debug {
@@ -26,5 +26,5 @@ func main() {
 
 	logger.Info("Profile \"config.yml\" loaded")
 
-	auth.LoginD()
+	auth.Login()
 }

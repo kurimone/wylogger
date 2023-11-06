@@ -18,12 +18,11 @@ type LoginReturns struct {
 
 func Login(params LoginParams) (LoginReturns, error) {
 	var result LoginReturns
+	logger.Debug("Requesting API")
 	err := request.Do("/login", "POST", params, &result)
 	if err != nil {
-		logger.Error("Failed HTTP request: %s", err)
 		return result, err
 	}
-	logger.Debug("HTTP request succeeded")
 
 	return result, nil
 }

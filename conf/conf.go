@@ -3,7 +3,6 @@ package conf
 import (
 	"os"
 	"sync"
-	"xjtlu-dorm-net-auth-helper/logger"
 
 	"gopkg.in/yaml.v3"
 )
@@ -25,14 +24,12 @@ var (
 func Load(filePath string) error {
 	bytes, err := os.ReadFile(filePath)
 	if err != nil {
-		logger.Debug("failed to read configuration: %s", err)
 		return err
 	}
 
 	var newConf Conf
 	err = yaml.Unmarshal(bytes, &newConf)
 	if err != nil {
-		logger.Debug("failed to parse configuration: %s", err)
 		return err
 	}
 
