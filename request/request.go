@@ -28,7 +28,7 @@ func Do(url, method string, params interface{}, result interface{}) error {
 	}
 
 	logger.Debug("Setting request header")
-	if err := SetHeader(request); err != nil {
+	if err := setHeader(request); err != nil {
 		return err
 	}
 
@@ -55,7 +55,7 @@ func Do(url, method string, params interface{}, result interface{}) error {
 	return nil
 }
 
-func SetHeader(request *http.Request) error {
+func setHeader(request *http.Request) error {
 	headers := make(map[string]string)
 	headers["Accept"] = "application/json, text/javascript, */*; q=0.01"
 	headers["Accept-Encoding"] = "gzip, deflate"
