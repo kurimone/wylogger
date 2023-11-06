@@ -1,7 +1,6 @@
 package api
 
 import (
-	"errors"
 	"xjtlu-dorm-net-auth-helper/logger"
 	"xjtlu-dorm-net-auth-helper/request"
 )
@@ -22,7 +21,7 @@ func Login(params LoginParams) (LoginReturns, error) {
 	err := request.Do("/login", "POST", params, &result)
 	if err != nil {
 		logger.Error("Failed HTTP request: %s", err)
-		return result, errors.New("failed HTTP reqeust")
+		return result, err
 	}
 	logger.Debug("HTTP request succeeded")
 

@@ -1,9 +1,9 @@
 package conf
 
 import (
-	"fmt"
 	"os"
 	"sync"
+	"xjtlu-dorm-net-auth-helper/logger"
 
 	"gopkg.in/yaml.v3"
 )
@@ -25,13 +25,15 @@ var (
 func Load(filePath string) error {
 	bytes, err := os.ReadFile(filePath)
 	if err != nil {
-		return fmt.Errorf("failed to read configuration: %w", err)
+		logger.Debug("failed to read configuration: %s", err)
+		return err
 	}
 
 	var newConf Conf
 	err = yaml.Unmarshal(bytes, &newConf)
 	if err != nil {
-		return fmt.Errorf("failed to parse configuration: %w", err)
+		logger.Debug("failed to parse configuration: %s", err)
+		return err
 	}
 
 	confLock.Lock()
@@ -46,13 +48,4 @@ func Get() Conf {
 	defer confLock.RUnlock()
 
 	return conf
-}
-
-func Reload(filePath string) error {
-	err := Load(filePath)
-	if err != nil {
-		return fmt.Errorf("failed to load configuration：%w", err)
-	}
-
-	return nil
 }
