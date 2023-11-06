@@ -10,7 +10,7 @@ import (
 
 type Conf struct {
 	Version  int    `yaml:"version"`
-	Debug    bool   `yaml:"mode"`
+	Debug    bool   `yaml:"debug"`
 	URL      string `yaml:"url"`
 	Domain   string `yaml:"domain"`
 	Username string `yaml:"username"`
