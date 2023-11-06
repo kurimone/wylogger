@@ -1,9 +1,9 @@
 package main
 
 import (
-	"xjtlu-dorm-net-auth-helper/auth"
-	"xjtlu-dorm-net-auth-helper/conf"
-	"xjtlu-dorm-net-auth-helper/logger"
+	"xjtlu-dorm-net-logger/auth"
+	"xjtlu-dorm-net-logger/conf"
+	"xjtlu-dorm-net-logger/logger"
 )
 
 func main() {

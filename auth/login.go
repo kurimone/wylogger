@@ -3,9 +3,9 @@ package auth
 import (
 	"fmt"
 	"time"
-	"xjtlu-dorm-net-auth-helper/api"
-	"xjtlu-dorm-net-auth-helper/conf"
-	"xjtlu-dorm-net-auth-helper/logger"
+	"xjtlu-dorm-net-logger/api"
+	"xjtlu-dorm-net-logger/conf"
+	"xjtlu-dorm-net-logger/logger"
 )
 
 func Login() {

@@ -1,4 +1,4 @@
-module xjtlu-dorm-net-auth-helper
+module xjtlu-dorm-net-logger
 
 go 1.21.2
 
