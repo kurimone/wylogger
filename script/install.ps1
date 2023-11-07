@@ -1,4 +1,4 @@
-$repoURL = "https://github.com/mafuka/wylogger"
+$repoURL = "https://ghproxy.com/github.com/mafuka/wylogger"
 $arch = if ([System.Environment]::Is64BitOperatingSystem) { "amd64" } else { "386" }
 $releaseName = "wylogger_windows_" + $arch + ".zip"
 $releaseURL = $repoURL + "/releases/latest/download/" + $releaseName
