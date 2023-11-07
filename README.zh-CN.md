@@ -1,6 +1,6 @@
-# xjtlu-dorm-net-logger
+# wylogger
 
-[English](https://github.com/mafuka/xjtlu-dorm-net-logger/blob/main/README.md) | 简体中文
+[English](https://github.com/mafuka/wylogger/blob/main/README.md) | 简体中文
 
 一个自动认证西交利物浦大学宿舍网络的工具。
 
@@ -13,7 +13,7 @@
 在 `Powershell` 中执行以下命令：
 
 ```powershell
-Invoke-WebRequest -Uri "https://ghproxy.com/raw.githubusercontent.com/mafuka/xjtlu-dorm-net-logger/main/script/install.ps1" -OutFile "install.ps1"; .\install.ps1; Remove-Item .\install.ps1
+Invoke-WebRequest -Uri "https://ghproxy.com/raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1" -OutFile "install.ps1"; .\install.ps1; Remove-Item .\install.ps1
 ```
 
 程序将会被安装在 `%USERPROFILE%\xdnl` 目录下。
@@ -40,4 +40,4 @@ which brew >/dev/null 2>&1 && echo "Homebrew is installed" || /bin/bash -c "$(cu
 
 ## 许可证
 
-[MIT](https://github.com/mafuka/xjtlu-dorm-net-logger/blob/main/LICENSE).
+[MIT](https://github.com/mafuka/wylogger/blob/main/LICENSE).

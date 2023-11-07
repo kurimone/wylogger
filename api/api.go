@@ -1,8 +1,8 @@
 package api
 
 import (
-	"xjtlu-dorm-net-logger/logger"
-	"xjtlu-dorm-net-logger/request"
+	"wylogger/logger"
+	"wylogger/request"
 )
 
 type LoginParams struct {

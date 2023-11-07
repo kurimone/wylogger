@@ -3,9 +3,9 @@ package auth
 import (
 	"fmt"
 	"time"
-	"xjtlu-dorm-net-logger/api"
-	"xjtlu-dorm-net-logger/conf"
-	"xjtlu-dorm-net-logger/logger"
+	"wylogger/api"
+	"wylogger/conf"
+	"wylogger/logger"
 )
 
 func Login() {

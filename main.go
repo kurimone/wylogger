@@ -1,9 +1,9 @@
 package main
 
 import (
-	"xjtlu-dorm-net-logger/auth"
-	"xjtlu-dorm-net-logger/conf"
-	"xjtlu-dorm-net-logger/logger"
+	"wylogger/auth"
+	"wylogger/conf"
+	"wylogger/logger"
 )
 
 func main() {

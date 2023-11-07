@@ -6,8 +6,8 @@ import (
 	"io"
 	"net/http"
 	_url "net/url"
-	"xjtlu-dorm-net-logger/conf"
-	"xjtlu-dorm-net-logger/logger"
+	"wylogger/conf"
+	"wylogger/logger"
 )
 
 func Do(url, method string, params interface{}, result interface{}) error {

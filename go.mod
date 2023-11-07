@@ -1,4 +1,4 @@
-module xjtlu-dorm-net-logger
+module wylogger
 
 go 1.21.2
 

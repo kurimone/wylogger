@@ -1,12 +1,12 @@
-$repoURL = "https://github.com/mafuka/xjtlu-dorm-net-logger"
+$repoURL = "https://github.com/mafuka/wylogger"
 $arch = if ([System.Environment]::Is64BitOperatingSystem) { "amd64" } else { "386" }
-$releaseName = "xdnl_windows_" + $arch + ".zip"
+$releaseName = "wylogger_windows_" + $arch + ".zip"
 $releaseURL = $repoURL + "/releases/latest/download/" + $releaseName
 
 $tempPath = [System.IO.Path]::GetTempPath()
-$downloadFile = Join-Path -Path $tempPath -ChildPath "xdnl.zip"
+$downloadFile = Join-Path -Path $tempPath -ChildPath "wylogger.zip"
 $userHome = [System.Environment]::GetFolderPath('MyDocuments')
-$xdnlPath = Join-Path -Path $userHome -ChildPath "xdnl"
+$xdnlPath = Join-Path -Path $userHome -ChildPath "wylogger"
 
 Invoke-WebRequest -Uri $releaseURL -OutFile $downloadFile
 

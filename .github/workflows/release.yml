@@ -2,41 +2,36 @@ name: Go Release
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - 'release-*'
 
 jobs:
-  goreleaser:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
-          go-version: 1.18
+          go-version: '1.18'
 
-      - name: Create Release Branch
+      - name: Extract version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/heads/release-}
+
+      - name: Create Git Tag
         run: |
-          VERSION=${GITHUB_REF#refs/tags/}
-          git checkout -b release-$VERSION
-          git push origin release-$VERSION
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a ${{ steps.get_version.outputs.VERSION }} -m "Release ${{ steps.get_version.outputs.VERSION }}"
+          git push origin ${{ steps.get_version.outputs.VERSION }}
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v3
         with:
           version: latest
-          args: release --rm-dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload Release Assets
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: dist/*
+          args: release --rm-dist --tag ${{ steps.get_version.outputs.VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
