@@ -13,7 +13,13 @@
 以**管理员模式**运行 Powershell ，执行以下命令：
 
 ```powershell
-Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri "https://ghproxy.com/raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1" -OutFile "install.ps1"; .\install.ps1; Remove-Item .\install.ps1
+powershell -NoExit -Command "& {Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1' -OutFile 'install.ps1'; .\install.ps1; Remove-Item .\install.ps1}"
+```
+
+*注：国内网络用户可能无法访问 GitHub，此时请使用以下命令：*
+
+```powershell
+powershell -NoExit -Command "& {Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri 'https://gh.api.99988866.xyz/https://raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1' -OutFile 'install.ps1'; .\install.ps1 -UseProxy; Remove-Item .\install.ps1}"
 ```
 
 > **当遇到 “是否要更改执行策略?” 的询问时，请务必回答 “全是”（A）。** 默认的执行策略会阻止您运行脚本，安装将无法进行。

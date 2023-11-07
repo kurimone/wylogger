@@ -13,7 +13,13 @@ This tool supports Windows, macOS, and Linux platforms.
 Run Powershell in **administrator mode** and execute the following command:
 
 ```powershell
-Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri "https://ghproxy.com/raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1" -OutFile "install.ps1"; .\install.ps1; Remove-Item .\install.ps1
+powershell -NoExit -Command "& {Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri 'https://gh.api.99988866.xyz/https://raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1' -OutFile 'install.ps1'; .\install.ps1; Remove-Item .\install.ps1}"
+```
+
+*Note: Users within the Chinese Mainland might not be able to access GitHub. In this case, please use the following command:*
+
+```powershell
+powershell -NoExit -Command "& {Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri 'https://gh.api.99988866.xyz/https://raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1' -OutFile 'install.ps1'; .\install.ps1 -UseProxy; Remove-Item .\install.ps1}"
 ```
 
 > **When prompted with "Do you want to change the execution policy?", be sure to answer "Yes to All" (A).** The default execution policy will prevent you from running scripts, and the installation will not be able to proceed.
