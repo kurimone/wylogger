@@ -9,7 +9,7 @@ import (
 	"wylogger/logger"
 )
 
-const version = "0.1.0"
+const version = "0.2.1"
 
 var (
 	confPath     string
