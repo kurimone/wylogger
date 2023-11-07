@@ -16,7 +16,7 @@
 Invoke-WebRequest -Uri "https://ghproxy.com/raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1" -OutFile "install.ps1"; .\install.ps1; Remove-Item .\install.ps1
 ```
 
-程序将会被安装在 `%USERPROFILE%\xdnl` 目录下。
+程序将会被安装在 `%USERPROFILE%\wylogger` 目录下。
 
 安装完成后，记事本会自动打开，请参考其中的提示修改并保存配置文件。
 

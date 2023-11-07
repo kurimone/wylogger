@@ -14,7 +14,7 @@ builds:
       - arm64
     goarm:
       - '6'
-    binary: xdnl
+    binary: wylogger
 
 archives:
   - format: zip

@@ -16,7 +16,7 @@ Execute the following command in `Powershell`:
 Invoke-WebRequest -Uri "https://ghproxy.com/raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1" -OutFile "install.ps1"; .\install.ps1; Remove-Item .\install.ps1
 ```
 
-The program will be installed in the `%USERPROFILE%\xdnl` directory.
+The program will be installed in the `%USERPROFILE%\wylogger` directory.
 
 After installation, Notepad will open automatically, please refer to the prompts inside to modify and save the configuration file.
 
