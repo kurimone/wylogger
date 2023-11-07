@@ -2,7 +2,18 @@ version: 1
 
 debug: false
 
+# Auth url, usually no changes required.
+# 认证服务地址，一般无需改动。
 url: "http://10.10.16.12"
+
+# ISP you are using: "cmcc"(Mobile), "cucc"(Unicom), or "ctcc"(Telecom).
+# 您使用的运营商："cmcc"（移动）、"cccc"（联通）或 "ctcc"（电信）。
 domain: "cmcc"
+
+# Username
+# 用户名
 username: "00000000000"
+
+# Password
+# 密码
 password: "000000"
