@@ -7,10 +7,6 @@ try {
     Read-Host
     exit 0
 } catch {
-    Install-Package
-}
-
-function Install-Package {
     # Check system architecture.
     $arch = $env:PROCESSOR_ARCHITECTURE
     $archWow = $env:PROCESSOR_ARCHITEW6432
