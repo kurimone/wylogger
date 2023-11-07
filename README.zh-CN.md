@@ -10,31 +10,33 @@
 
 ### Windows
 
-在 `Powershell` 中执行以下命令：
+以**管理员模式**运行 Powershell ，执行以下命令：
 
 ```powershell
-Invoke-WebRequest -Uri "https://ghproxy.com/raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1" -OutFile "install.ps1"; .\install.ps1; Remove-Item .\install.ps1
+Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri "https://ghproxy.com/raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1" -OutFile "install.ps1"; .\install.ps1; Remove-Item .\install.ps1
 ```
 
-程序将会被安装在 `%USERPROFILE%\wylogger` 目录下。
+> **当遇到 “是否要更改执行策略?” 的询问时，请务必回答 “全是”（A）。** 默认的执行策略会阻止您运行脚本，安装将无法进行。
+
+如无意外，wylogger 将会被安装在 `%USERPROFILE%\wylogger` 目录下。
 
 安装完成后，记事本会自动打开，请参考其中的提示修改并保存配置文件。
 
 ### MacOS
 
-首先需要先安装 `Homebrew`，打开 `终端`，执行以下命令：
+首先需要安装 **Homebrew**，打开**终端**，执行以下命令：
 
 ```sh
 which brew >/dev/null 2>&1 && echo "Homebrew is installed" || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-然后执行以下命令从 Homebrew 安装程序：
+然后从 Homebrew 安装 wylogger ：
 
 > TODO
 
 ### Linux, or another Unix-like OS
 
-在 `终端` 中执行以下命令：
+在终端中执行以下命令：
 
 > TODO
 
