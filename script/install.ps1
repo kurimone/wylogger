@@ -58,21 +58,21 @@ function Install-Package {
     # Unzip package.
     Expand-Archive -Path $downloadFile -DestinationPath $installDir -Force
 
-    # Copy profile.
-    $profileExamplePath = Join-Path -Path $installDir -ChildPath "config.example.yml"
-    $profilePath = Join-Path -Path $installDir -ChildPath "config.yml"
-    Copy-Item -Path $profileExamplePath -Destination $profilePath -Force
+    # Copy configuration file.
+    $confExamplePath = Join-Path -Path $installDir -ChildPath "config.example.yml"
+    $confPath = Join-Path -Path $installDir -ChildPath "config.yml"
+    Copy-Item -Path $confExamplePath -Destination $confPath -Force
 
     # Set user env PATH.
     $currentPATH = [Environment]::GetEnvironmentVariable("PATH", [EnvironmentVariableTarget]::User)
     $newPATH = currentPATH + ";" + $installDir
     [Environment]::SetEnvironmentVariable("PATH", $newPATH, [EnvironmentVariableTarget]::User)
 
-    # Open profile.
+    # Open configuration file.
     Start-Process "notepad.exe" -ArgumentList $configPath
 
     # End.
-    Write-Output "$projectName has been installed to $installDir, the profile is open for modification, the installer will now conclude, press Enter to exit..."
+    Write-Output "$projectName has been installed to $installDir, the configuration file is open for modification, the installer will now conclude, press Enter to exit..."
     Read-Host
     exit 0
 }

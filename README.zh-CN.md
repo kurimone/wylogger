@@ -6,7 +6,7 @@
 
 ## 安装
 
-本工具支持 Windows、MacOS 和 Linux 平台。
+本工具支持 Windows、macOS 和 Linux 平台。
 
 ### Windows
 
@@ -22,7 +22,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri "https://ghp
 
 安装完成后，记事本会自动打开，请参考其中的提示修改并保存配置文件。
 
-### MacOS
+### macOS
 
 首先需要安装 **Homebrew**，打开**终端**，执行以下命令：
 
@@ -30,7 +30,14 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri "https://ghp
 which brew >/dev/null 2>&1 && echo "Homebrew is installed" || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-然后从 Homebrew 安装 wylogger ：
+然后从 Homebrew 安装 wylogger：
+
+```sh
+brew tap mafuka/wylogger
+brew install wylogger
+```
+
+配置文件将会在这里： `/etc/wylogger/config.yml`。
 
 > TODO
 

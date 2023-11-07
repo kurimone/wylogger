@@ -3,15 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
-	"path/filepath"
 	"runtime"
 	"wylogger/auth"
 	"wylogger/conf"
 	"wylogger/logger"
 )
 
-const version = "1.0.0"
+const version = "0.1.0"
 
 var (
 	confPath     string
@@ -31,9 +29,9 @@ func main() {
 
 	err := conf.Load(confPath)
 	if err != nil {
-		logger.Fatal("Failed to load profile \"%s\": %s", confPath, err)
+		logger.Fatal("Failed to load configuration \"%s\": %s", confPath, err)
 	}
-	logger.Info("Profile \"%s\" loaded", confPath)
+	logger.Info("Configuration \"%s\" loaded", confPath)
 
 	if conf.Get().Debug {
 		setDebug()
@@ -64,5 +62,5 @@ func getDefaultConfPath() string {
 	if runtime.GOOS == "windows" {
 		return "config.yml"
 	}
-	return filepath.Join(os.Getenv("HOME"), "wylogger", "config.yml")
+	return "/etc/wylogger/config.yml"
 }

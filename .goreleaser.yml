@@ -37,3 +37,20 @@ snapshot:
   
 changelog:
   skip: false
+
+brews:
+  - 
+    tap:
+      owner: mafuka
+      name: wylogger
+    folder: Formula
+    homepage: "https://github.com/mafuka/wylogger"
+    description: "A tool for automatically authenticate the network of Wen Yuan Talent Apartment."
+    install: |
+      bin.install "wylogger"
+    post_install: |
+      (etc/"wylogger").mkpath
+      unless (etc/"wylogger/config.yml").exist?
+        cp "pkgshare/config.example.yml", etc/"wylogger/config.yml"
+      end
+      puts "Please customize your configuration file at #{etc/"wylogger/config.yml"}"

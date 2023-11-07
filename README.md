@@ -6,7 +6,7 @@ A tool for automatically authenticate the network of Wen Yuan Talent Apartment.
 
 ## Installation
 
-This tool supports Windows, MacOS, and Linux platforms.
+This tool supports Windows, macOS, and Linux platforms.
 
 ### Windows
 
@@ -22,7 +22,7 @@ If all goes well, wylogger will be installed in the `%USERPROFILE%\wylogger` dir
 
 After the installation is complete, Notepad will open automatically. Please refer to the prompts in it to modify and save the configuration file.
 
-### MacOS
+### macOS
 
 First, you need to install **Homebrew**. Open the **Terminal** and execute the following command:
 
@@ -32,7 +32,12 @@ which brew >/dev/null 2>&1 && echo "Homebrew is installed" || /bin/bash -c "$(cu
 
 Then install wylogger from Homebrew:
 
-> TODO
+```sh
+brew tap mafuka/wylogger
+brew install wylogger
+```
+
+The configuration file will be here: `/etc/wylogger/config.yml`.
 
 ### Linux, or another Unix-like OS
 
