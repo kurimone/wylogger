@@ -48,10 +48,10 @@ brews:
     description: "A tool for automatically authenticate the network of Wen Yuan Talent Apartment."
     install: |
       bin.install "wylogger"
-      prefix.install "config.example.yml"
+      libexec.install "config.example.yml"
     post_install: |
-      (etc/"wylogger").mkpath
       unless (etc/"wylogger/config.yml").exist?
-        cp opt_prefix/"config.example.yml", etc/"wylogger/config.yml"
+        (etc/"wylogger").mkpath
+        etc.install_symlink libexec/"config.example.yml" => "wylogger/config.yml"
       end
       puts "Please customize your configuration file at #{etc/"wylogger/config.yml"}"
