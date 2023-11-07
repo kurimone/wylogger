@@ -1,6 +1,6 @@
 # wylogger
 
-English | [简体中文](https://github.com/mafuka/wylogger/blob/main/README.zh_CN.md)
+English | [简体中文](https://github.com/mafuka/wylogger/blob/main/README.zh-CN.md)
 
 A tool for automatic authentication of the Wen Yuan Talent Apartment network.
 
