@@ -42,7 +42,7 @@ brews:
   - 
     tap:
       owner: mafuka
-      name: wylogger
+      name: homebrew-tap
     folder: Formula
     homepage: "https://github.com/mafuka/wylogger"
     description: "A tool for automatically authenticate the network of Wen Yuan Talent Apartment."

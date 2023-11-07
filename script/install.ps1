@@ -1,11 +1,15 @@
+param (
+    [bool]$UseProxy = 0
+)
+Write-Host "Use Proxy: $UseProxy"
+
 $projectName = "wylogger"
 
 # Check if installed.
 try {
     $commandInfo = Get-Command wylogger -ErrorAction Stop
-    Write-Host "$projectName is already in $($commandInfo.Source), the installation will now terminate, press Enter to exit..."
-    Read-Host
-    exit 0
+    Write-Host "$projectName is already in $($commandInfo.Source), the installation will now terminate."
+    Read-Host -Prompt "Press Enter to exit..."
 } catch {
     # Check system architecture.
     $arch = $env:PROCESSOR_ARCHITECTURE
@@ -19,16 +23,18 @@ try {
         $architecture = "arm64"
     } else {
         $architecture = "unknown"
-        Write-Host "The system architecture could not be identified, the installation will now terminate, press Enter to exit..."
-        Read-Host
-        exit 1
+        Write-Host "The system architecture could not be identified, the installation will now terminate."
+        Read-Host -Prompt "Press Enter to exit..."
     }
-
 
     Write-Host "Architecture: $architecture"
 
     # Get package url.
-    $repoURL = "https://ghproxy.com/github.com/mafuka/wylogger"
+    $repoURL = if ($UseProxy) {
+        "https://github.hscsec.cn/mafuka/wylogger"
+    } else {
+        "https://github.com/mafuka/wylogger"
+    }
     $os = "windows"
     $packageName = $projectName + "_" + $os + "_" + $arch + ".zip"
     $packageURL = $repoURL + "/releases/latest/download/" + $packageName
@@ -52,7 +58,7 @@ try {
     Invoke-WebRequest -Uri $packageURL -OutFile $downloadPath
 
     # Unzip package.
-    Expand-Archive -Path $downloadFile -DestinationPath $installDir -Force
+    Expand-Archive -Path $downloadPath -DestinationPath $installDir -Force
 
     # Copy configuration file.
     $confExamplePath = Join-Path -Path $installDir -ChildPath "config.example.yml"
@@ -61,14 +67,13 @@ try {
 
     # Set user env PATH.
     $currentPATH = [Environment]::GetEnvironmentVariable("PATH", [EnvironmentVariableTarget]::User)
-    $newPATH = currentPATH + ";" + $installDir
+    $newPATH = $currentPATH + ";" + $installDir
     [Environment]::SetEnvironmentVariable("PATH", $newPATH, [EnvironmentVariableTarget]::User)
 
     # Open configuration file.
-    Start-Process "notepad.exe" -ArgumentList $configPath
+    Start-Process "notepad.exe" -ArgumentList $confPath
 
     # End.
-    Write-Output "$projectName has been installed to $installDir, the configuration file is open for modification, the installer will now conclude, press Enter to exit..."
-    Read-Host
-    exit 0
+    Write-Output "$projectName has been installed to $installDir, the configuration file is open for modification, the installer will now conclude."
+    Read-Host -Prompt "Press Enter to exit..."
 }
