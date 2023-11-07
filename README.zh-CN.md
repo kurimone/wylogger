@@ -39,7 +39,7 @@ which brew >/dev/null 2>&1 && echo "Homebrew is installed" || /bin/bash -c "$(cu
 然后从 Homebrew 安装 wylogger：
 
 ```sh
-brew tap mafuka/wylogger
+brew tap mafuka/tap
 brew install wylogger
 ```
 
