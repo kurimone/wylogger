@@ -1,0 +1,34 @@
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - '386'
+      - amd64
+      - arm64
+    goarm:
+      - '6'
+    binary: xdnl
+archives:
+  - format: zip
+    format_overrides:
+      - goos: darwin
+        format: tar.gz
+      - goos: linux
+        format: tar.gz
+    files:
+      - README.md
+      - README.zh-CN.md
+      - config.example.yml
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  skip: false
