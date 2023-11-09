@@ -2,7 +2,9 @@ before:
   hooks:
     - go mod tidy
 builds:
-  - env:
+  - ldflags: |
+      -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+    env:
       - CGO_ENABLED=0
     goos:
       - windows
@@ -48,10 +50,6 @@ brews:
     description: "A tool for automatically authenticate the network of Wen Yuan Talent Apartment."
     install: |
       bin.install "wylogger"
-      libexec.install "config.example.yml"
+      etc.install "config.example.yml" => "config.yml"
     post_install: |
-      unless (etc/"wylogger/config.yml").exist?
-        (etc/"wylogger").mkpath
-        etc.install_symlink libexec/"config.example.yml" => "wylogger/config.yml"
-      end
       puts "Please customize your configuration file at #{etc/"wylogger/config.yml"}"
