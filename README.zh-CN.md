@@ -45,20 +45,52 @@ brew install wylogger
 
 配置文件将会在这里： `/etc/wylogger/config.yml`。
 
-> TODO
-
 ### Linux, or another Unix-like OS
 
 在终端中执行以下命令：
 
 > TODO
 
+## 配置
+
+- 在 Windows 中，配置文件位于 `%USERPROFILE%\wylogger\config.yml`
+- 在 macOS 和 Linux 中，配置文件位于 `/etc/wylogger/config.yml`
+
+打开配置文件，根据其中提示，修改相应配置项。不要忘记保存。
 
 ## 使用
 
-> TODO
+打开终端，执行 `wylogger` 即可。只要不手动结束，程序就会一直运行。
 
 ## 自启动
+
+> TODO
+
+## 卸载
+
+### Windows
+
+以**管理员模式**运行 Powershell ，执行以下命令：
+
+```
+powershell -NoExit -Command "& {Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1' -OutFile 'install.ps1'; .\install.ps1 -Action Remove; Remove-Item .\install.ps1}"
+```
+
+*注：国内网络用户可能无法访问 GitHub，此时请使用以下命令：*
+
+```powershell
+powershell -NoExit -Command "& {Set-ExecutionPolicy -ExecutionPolicy Bypass; Invoke-WebRequest -Uri 'https://gh.api.99988866.xyz/https://raw.githubusercontent.com/mafuka/wylogger/main/script/install.ps1' -OutFile 'install.ps1'; .\install.ps1 -Action Remove; Remove-Item .\install.ps1}"
+```
+
+### macOS
+
+打开**终端**，执行以下命令：
+
+```sh
+brew remove wylogger
+```
+
+### Linux, or another Unix-like OS
 
 > TODO
 
